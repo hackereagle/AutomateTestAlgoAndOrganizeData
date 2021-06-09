@@ -45,7 +45,8 @@ _deps
 
 # other
 build/
-Server/build/*
+*/build/*
+*/Bin/*
 *.jpg
 Client/DemoCommuniImage/Bin/*
 Client/DemoCommuniImage/Bin/
