@@ -10,7 +10,7 @@ namespace OrganizeData
     struct StepSpeedInfo
     {
         public string StepName;
-        public int Time; // ms
+        public double Time; // ms
     }
 
     class FileData
@@ -32,7 +32,7 @@ namespace OrganizeData
                     string[] texts = line.Split(' ');
                     StepSpeedInfo temp;
                     temp.StepName = texts[0];
-                    temp.Time = Convert.ToInt32(texts[2]);
+                    temp.Time = Convert.ToDouble(texts[2]);
                     mStepsSpeedInfo.Add(temp);
                 }
             }
@@ -72,16 +72,16 @@ namespace OrganizeData
             for(int i = 0; i < count; i++)
             {
                 string oneLine;
-                Int64 totalTime = 0;
+                double totalTime = 0;
 
                 oneLine = mData[0].StepsSpeed[i].StepName;
                 foreach (var data in mData)
                 {
-                    int time = data.StepsSpeed[i].Time;
+                    double time = data.StepsSpeed[i].Time;
                     oneLine = oneLine + $",{time}";
                     totalTime = totalTime + time;
                 }
-                oneLine = oneLine + $",{totalTime / mData.Count}";
+                oneLine = oneLine + $",{totalTime / Convert.ToDouble(mData.Count)}";
 
                 streamWriter.WriteLine(oneLine);
             }
