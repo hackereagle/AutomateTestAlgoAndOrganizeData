@@ -30,9 +30,21 @@ namespace OrganizeData
                 if (IsRecordSpeedInfo(line))
                 {
                     string[] texts = line.Split(' ');
+                    
                     StepSpeedInfo temp;
-                    temp.StepName = texts[0];
-                    temp.Time = Convert.ToDouble(texts[2]);
+                    temp.StepName = string.Empty;
+                    int spendIndex = 0;
+                    for (int i = 0; texts[i] != "spend"; i++)
+                    {
+                        if (i == 0)
+                            temp.StepName = texts[0];
+                        else
+                            temp.StepName = temp.StepName + "_" + texts[i];
+                        spendIndex = i;
+                    }
+                    spendIndex = spendIndex + 1;
+
+                    temp.Time = Convert.ToDouble(texts[spendIndex + 1]);
                     mStepsSpeedInfo.Add(temp);
                 }
             }
@@ -41,9 +53,12 @@ namespace OrganizeData
         private bool IsRecordSpeedInfo(string line)
         {
             bool isRecordSpeedInfo = false;
+
             int pos = line.IndexOf("spend");
             if (pos > -1)
+            { 
                 isRecordSpeedInfo = true;
+            }
 
             return isRecordSpeedInfo;
         }
