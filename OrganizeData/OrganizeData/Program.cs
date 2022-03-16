@@ -31,8 +31,21 @@ namespace OrganizeData
                 {
                     string[] texts = line.Split(' ');
                     StepSpeedInfo temp;
-                    temp.StepName = texts[0];
-                    temp.Time = Convert.ToDouble(texts[2]);
+                    if (texts.Length == 4)
+                    {
+                        temp.StepName = texts[0];
+                        temp.Time = Convert.ToDouble(texts[2]);
+                    }
+                    else
+                    { 
+                        temp.Time = Convert.ToDouble(texts[texts.Length - 2]);
+                        string stepName = "";
+                        for (int i = 0; i < texts.Length - 3; i++)
+                        {
+                            stepName = stepName + " " + texts[i];
+                        }
+                        temp.StepName = stepName;
+                    }
                     mStepsSpeedInfo.Add(temp);
                 }
             }
